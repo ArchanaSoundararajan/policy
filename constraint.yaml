@@ -1,0 +1,11 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sAzureV1RequiredAnnotations
+metadata:
+  name: ns-must-have-annotation
+spec:
+  match:
+    kinds:
+      - apiGroups: [""]
+        kinds: ["Namespace"]
+  parameters:
+    annotations: ["nginx.org/ssl-services"]
