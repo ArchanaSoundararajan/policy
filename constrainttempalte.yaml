@@ -36,15 +36,11 @@ spec:
     - target: admission.k8s.gatekeeper.sh
       rego: |
         package k8sazurev1requiredannotations
-		
-          violation[{"msg": msg}] {
+        violation[{"msg": msg}] {
           input.review.kind.kind == "Ingress"
           re_match("^(extensions|networking.k8s.io)$", input.review.kind.group)
           violation[{"msg": msg}]
         }
-		
-		
-		
         violation[{"msg": msg, "details": {"missing_annotations": missing}}] {
           provided := {annotation | input.review.object.metadata.annotations[annotation]}
           required := {annotation | annotation := input.parameters.annotations[_].key}
@@ -52,7 +48,6 @@ spec:
           count(missing) > 0
           msg := sprintf("you must provide annotation(s): %v", [missing])
         }
-
         violation[{"msg": msg}] {
           value := input.review.object.metadata.annotations[key]
           expected := input.parameters.annotations[_]
