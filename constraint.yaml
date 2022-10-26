@@ -6,6 +6,6 @@ spec:
   match:
     kinds:
       - apiGroups: [""]
-        kinds: ["Namespace"]
+        kinds: ["Ingress"]
   parameters:
-    annotations: ["nginx.org/ssl-services"]
+    annotations: : {{ .Values.annotations }}
