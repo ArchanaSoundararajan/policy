@@ -37,7 +37,7 @@ spec:
       rego: |
         package k8sazurev1requiredannotations
 		
-		  violation[{"msg": msg}] {
+          violation[{"msg": msg}] {
           input.review.kind.kind == "Ingress"
           re_match("^(extensions|networking.k8s.io)$", input.review.kind.group)
           violation[{"msg": msg}]
